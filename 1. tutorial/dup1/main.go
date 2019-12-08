@@ -18,6 +18,9 @@ func main() {
 	counts := make(map[string]int)
 	// Scanner reads input and breaks it into lines or words
 	input := bufio.NewScanner(os.Stdin)
+	// Each call to input.Scan() reads the next line and removes the newline character from the end
+	// the result can be retrieved by calling input.Text()
+	// The Scan function returns true if there is a line and false when there is no more input.
 	for input.Scan() {
 		counts[input.Text()]++
 	}
