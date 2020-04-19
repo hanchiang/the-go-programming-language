@@ -1,6 +1,6 @@
-// The old contents of s are no longer in use, so the y
+// The old contents of s are no longer in use, so they
 // will be garbage-collected in due course.
-// If the amount of data invo lved is large, this could be costly.
+// If the amount of data involved is large, this could be costly.
 
 // Using strings.Join is a more efficient way of concatenating strings for large amount of data
 
