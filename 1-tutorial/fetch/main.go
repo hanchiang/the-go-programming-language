@@ -9,6 +9,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"io"
 	"net/http"
@@ -27,12 +28,15 @@ func main() {
 			os.Exit(1)
 		}
 		// body, err := ioutil.ReadAll(resp.Body) // Reads the whole file into memory
-		_, err = io.Copy(os.Stdout, resp.Body)
+
+		var buf bytes.Buffer
+		io.Copy(&buf, resp.Body)
+
 		resp.Body.Close()
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "fetch: reading %s: %v\n", url, err)
 			os.Exit(1)
 		}
-		// fmt.Printf("status: %s\n%s", resp.Status, resp.Body)
+		fmt.Printf("status: %s\n%s", resp.Status, buf.String())
 	}
 }
