@@ -25,10 +25,30 @@ func TestIsPalindrome(t *testing.T) {
 		{"palindrome", false}, // non-palindrome
 		{"desserts", false},   // semi-palindrome
 	}
+
 	for _, test := range tests {
 		if got := IsPalindrome(test.input); got != test.want {
 			t.Errorf("IsPalindrome(%q) = %v", test.input, got)
 		}
+	}
+}
+
+func BenchmarkIsPalindrome(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		IsPalindrome("Et se resservir, ivresse reste.")
+	}
+}
+
+func BenchmarkIsPalindromeReduceIterations(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		IsPalindromeReduceIterations("Et se resservir, ivresse reste.")
+	}
+}
+
+// Reducing the number of memory allocations yields a great performance boost
+func BenchmarkIsPalindromeAllocateArray(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		IsPalindromeAllocateArray("Et se resservir, ivresse reste.")
 	}
 }
 
