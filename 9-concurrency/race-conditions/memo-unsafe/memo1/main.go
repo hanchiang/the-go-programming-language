@@ -6,9 +6,10 @@ import (
 	"time"
 
 	"github.com/hanchiang/the-go-programming-language/9-concurrency/race-conditions/httpGet"
-	"github.com/hanchiang/the-go-programming-language/9-concurrency/race-conditions/memo"
+	"github.com/hanchiang/the-go-programming-language/9-concurrency/race-conditions/memo-unsafe/memo"
 )
 
+// Make HTTP requests sequentially
 func main() {
 	m := memo.New(httpGet.HttpGetBody)
 	urls := []string{
