@@ -1,6 +1,8 @@
 package memo
 
-import "sync"
+import (
+	"sync"
+)
 
 type Memo struct {
 	f     Func

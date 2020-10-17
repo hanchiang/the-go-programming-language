@@ -1,6 +1,8 @@
 package memo
 
-import "sync"
+import (
+	"sync"
+)
 
 /**
 Each entry contains the memoized result of a call to the function f, as before, but it additionally

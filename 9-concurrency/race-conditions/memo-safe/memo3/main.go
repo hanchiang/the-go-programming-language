@@ -10,12 +10,17 @@ import (
 	"github.com/hanchiang/the-go-programming-language/9-concurrency/race-conditions/memo-safe/memo"
 )
 
+func getUrls() []string {
+	return []string{
+		"http://www.google.com", "http://www.google.com", "http://www.google.com",
+		"http://www.facebook.com", "http://www.facebook.com",
+		"http://gopl.io", "http://gopl.io"}
+}
+
 // "http://www.google.com" is fetched twice, which is redundant
 func redundant() {
 	m := memo.New(httpGet.HttpGetBody)
-	urls := []string{
-		"http://www.google.com", "http://www.google.com", "http://www.facebook.com",
-		"http://gopl.io"}
+	urls := getUrls()
 	var n sync.WaitGroup
 	for _, url := range urls {
 		n.Add(1)
@@ -35,9 +40,8 @@ func redundant() {
 
 func improved() {
 	m := memo.New2(httpGet.HttpGetBody)
-	urls := []string{
-		"http://www.google.com", "http://www.google.com", "http://www.facebook.com",
-		"http://gopl.io"}
+	urls := getUrls()
+
 	var n sync.WaitGroup
 	for _, url := range urls {
 		n.Add(1)
@@ -56,5 +60,11 @@ func improved() {
 }
 
 func main() {
+	fmt.Println("Running redundant version of memo")
+	redundant()
+	fmt.Println()
+
+	fmt.Println("Running improved version of memo")
 	improved()
+	fmt.Println()
 }
